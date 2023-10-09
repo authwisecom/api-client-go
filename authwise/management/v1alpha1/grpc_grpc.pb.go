@@ -10,12 +10,11 @@ package v1alpha1
 
 import (
 	context "context"
-	v1alpha1 "github.com/authwisecom/api-client-go/authwise/auth/v1alpha1"
+	v1alpha1 "github.com/authwisecom/api-client-go/authwise/types/core/v1alpha1"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	structpb "google.golang.org/protobuf/types/known/structpb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -28,22 +27,21 @@ const (
 	AuthwiseManagementService_ListTenants_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/ListTenants"
 	AuthwiseManagementService_CreateTenant_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateTenant"
 	AuthwiseManagementService_UpdateTenant_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateTenant"
+	AuthwiseManagementService_PatchTenant_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchTenant"
 	AuthwiseManagementService_DeleteTenant_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteTenant"
-	AuthwiseManagementService_GetTenantConfig_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/GetTenantConfig"
-	AuthwiseManagementService_UpdateTenantConfig_FullMethodName          = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateTenantConfig"
 	AuthwiseManagementService_GetTenantUrl_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/GetTenantUrl"
 	AuthwiseManagementService_ListTenantUrls_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/ListTenantUrls"
 	AuthwiseManagementService_CreateTenantUrl_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateTenantUrl"
 	AuthwiseManagementService_UpdateTenantUrl_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateTenantUrl"
+	AuthwiseManagementService_PatchTenantUrl_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchTenantUrl"
 	AuthwiseManagementService_DeleteTenantUrl_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteTenantUrl"
-	AuthwiseManagementService_GetTenantUrlConfig_FullMethodName          = "/authwise.management.v1alpha1.AuthwiseManagementService/GetTenantUrlConfig"
-	AuthwiseManagementService_UpdateTenantUrlConfig_FullMethodName       = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateTenantUrlConfig"
 	AuthwiseManagementService_GetUser_FullMethodName                     = "/authwise.management.v1alpha1.AuthwiseManagementService/GetUser"
 	AuthwiseManagementService_ListUsers_FullMethodName                   = "/authwise.management.v1alpha1.AuthwiseManagementService/ListUsers"
 	AuthwiseManagementService_UserSearchPredicates_FullMethodName        = "/authwise.management.v1alpha1.AuthwiseManagementService/UserSearchPredicates"
 	AuthwiseManagementService_SearchUsers_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/SearchUsers"
 	AuthwiseManagementService_CreateUser_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateUser"
 	AuthwiseManagementService_UpdateUser_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateUser"
+	AuthwiseManagementService_PatchUser_FullMethodName                   = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchUser"
 	AuthwiseManagementService_DeleteUser_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteUser"
 	AuthwiseManagementService_ListRolesByUser_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/ListRolesByUser"
 	AuthwiseManagementService_AssociateRolesToUser_FullMethodName        = "/authwise.management.v1alpha1.AuthwiseManagementService/AssociateRolesToUser"
@@ -51,13 +49,13 @@ const (
 	AuthwiseManagementService_ListProviders_FullMethodName               = "/authwise.management.v1alpha1.AuthwiseManagementService/ListProviders"
 	AuthwiseManagementService_CreateProvider_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateProvider"
 	AuthwiseManagementService_UpdateProvider_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateProvider"
+	AuthwiseManagementService_PatchProvider_FullMethodName               = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchProvider"
 	AuthwiseManagementService_DeleteProvider_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteProvider"
-	AuthwiseManagementService_GetProviderConfig_FullMethodName           = "/authwise.management.v1alpha1.AuthwiseManagementService/GetProviderConfig"
-	AuthwiseManagementService_UpdateProviderConfig_FullMethodName        = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateProviderConfig"
 	AuthwiseManagementService_GetRealm_FullMethodName                    = "/authwise.management.v1alpha1.AuthwiseManagementService/GetRealm"
 	AuthwiseManagementService_ListRealms_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/ListRealms"
 	AuthwiseManagementService_CreateRealm_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateRealm"
 	AuthwiseManagementService_UpdateRealm_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateRealm"
+	AuthwiseManagementService_PatchRealm_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchRealm"
 	AuthwiseManagementService_DeleteRealm_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteRealm"
 	AuthwiseManagementService_GetClient_FullMethodName                   = "/authwise.management.v1alpha1.AuthwiseManagementService/GetClient"
 	AuthwiseManagementService_ListClients_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/ListClients"
@@ -65,25 +63,27 @@ const (
 	AuthwiseManagementService_AssociateProvidersToClient_FullMethodName  = "/authwise.management.v1alpha1.AuthwiseManagementService/AssociateProvidersToClient"
 	AuthwiseManagementService_CreateClient_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateClient"
 	AuthwiseManagementService_UpdateClient_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateClient"
+	AuthwiseManagementService_PatchClient_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchClient"
 	AuthwiseManagementService_DeleteClient_FullMethodName                = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteClient"
-	AuthwiseManagementService_GetClientConfig_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/GetClientConfig"
-	AuthwiseManagementService_UpdateClientConfig_FullMethodName          = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateClientConfig"
 	AuthwiseManagementService_GetRole_FullMethodName                     = "/authwise.management.v1alpha1.AuthwiseManagementService/GetRole"
 	AuthwiseManagementService_ListRoles_FullMethodName                   = "/authwise.management.v1alpha1.AuthwiseManagementService/ListRoles"
 	AuthwiseManagementService_ListPermissionsByRole_FullMethodName       = "/authwise.management.v1alpha1.AuthwiseManagementService/ListPermissionsByRole"
 	AuthwiseManagementService_AssociatePermissionsToRole_FullMethodName  = "/authwise.management.v1alpha1.AuthwiseManagementService/AssociatePermissionsToRole"
 	AuthwiseManagementService_CreateRole_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateRole"
 	AuthwiseManagementService_UpdateRole_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateRole"
+	AuthwiseManagementService_PatchRole_FullMethodName                   = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchRole"
 	AuthwiseManagementService_DeleteRole_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteRole"
 	AuthwiseManagementService_GetPermission_FullMethodName               = "/authwise.management.v1alpha1.AuthwiseManagementService/GetPermission"
 	AuthwiseManagementService_ListPermissions_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/ListPermissions"
 	AuthwiseManagementService_CreatePermission_FullMethodName            = "/authwise.management.v1alpha1.AuthwiseManagementService/CreatePermission"
 	AuthwiseManagementService_UpdatePermission_FullMethodName            = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdatePermission"
+	AuthwiseManagementService_PatchPermission_FullMethodName             = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchPermission"
 	AuthwiseManagementService_DeletePermission_FullMethodName            = "/authwise.management.v1alpha1.AuthwiseManagementService/DeletePermission"
 	AuthwiseManagementService_GetAudience_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/GetAudience"
 	AuthwiseManagementService_ListAudiences_FullMethodName               = "/authwise.management.v1alpha1.AuthwiseManagementService/ListAudiences"
 	AuthwiseManagementService_CreateAudience_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateAudience"
 	AuthwiseManagementService_UpdateAudience_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateAudience"
+	AuthwiseManagementService_PatchAudience_FullMethodName               = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchAudience"
 	AuthwiseManagementService_DeleteAudience_FullMethodName              = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteAudience"
 	AuthwiseManagementService_GetScope_FullMethodName                    = "/authwise.management.v1alpha1.AuthwiseManagementService/GetScope"
 	AuthwiseManagementService_ListScopes_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/ListScopes"
@@ -91,6 +91,7 @@ const (
 	AuthwiseManagementService_AssociatePermissionsToScope_FullMethodName = "/authwise.management.v1alpha1.AuthwiseManagementService/AssociatePermissionsToScope"
 	AuthwiseManagementService_CreateScope_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateScope"
 	AuthwiseManagementService_UpdateScope_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateScope"
+	AuthwiseManagementService_PatchScope_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchScope"
 	AuthwiseManagementService_DeleteScope_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteScope"
 	AuthwiseManagementService_GetEvent_FullMethodName                    = "/authwise.management.v1alpha1.AuthwiseManagementService/GetEvent"
 	AuthwiseManagementService_ListEvents_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/ListEvents"
@@ -98,11 +99,13 @@ const (
 	AuthwiseManagementService_ListAppearanceProfiles_FullMethodName      = "/authwise.management.v1alpha1.AuthwiseManagementService/ListAppearanceProfiles"
 	AuthwiseManagementService_CreateAppearanceProfile_FullMethodName     = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateAppearanceProfile"
 	AuthwiseManagementService_UpdateAppearanceProfile_FullMethodName     = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateAppearanceProfile"
+	AuthwiseManagementService_PatchAppearanceProfile_FullMethodName      = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchAppearanceProfile"
 	AuthwiseManagementService_DeleteAppearanceProfile_FullMethodName     = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteAppearanceProfile"
 	AuthwiseManagementService_GetTheme_FullMethodName                    = "/authwise.management.v1alpha1.AuthwiseManagementService/GetTheme"
 	AuthwiseManagementService_ListThemes_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/ListThemes"
 	AuthwiseManagementService_CreateTheme_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/CreateTheme"
 	AuthwiseManagementService_UpdateTheme_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/UpdateTheme"
+	AuthwiseManagementService_PatchTheme_FullMethodName                  = "/authwise.management.v1alpha1.AuthwiseManagementService/PatchTheme"
 	AuthwiseManagementService_DeleteTheme_FullMethodName                 = "/authwise.management.v1alpha1.AuthwiseManagementService/DeleteTheme"
 )
 
@@ -114,22 +117,21 @@ type AuthwiseManagementServiceClient interface {
 	ListTenants(ctx context.Context, in *ListTenantsRequest, opts ...grpc.CallOption) (*ListTenantsResponse, error)
 	CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*v1alpha1.Tenant, error)
 	UpdateTenant(ctx context.Context, in *UpdateTenantRequest, opts ...grpc.CallOption) (*v1alpha1.Tenant, error)
+	PatchTenant(ctx context.Context, in *PatchTenantRequest, opts ...grpc.CallOption) (*v1alpha1.Tenant, error)
 	DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetTenantConfig(ctx context.Context, in *GetTenantConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
-	UpdateTenantConfig(ctx context.Context, in *UpdateTenantConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
 	GetTenantUrl(ctx context.Context, in *GetTenantUrlRequest, opts ...grpc.CallOption) (*v1alpha1.TenantUrl, error)
 	ListTenantUrls(ctx context.Context, in *ListTenantUrlsRequest, opts ...grpc.CallOption) (*ListTenantUrlsResponse, error)
 	CreateTenantUrl(ctx context.Context, in *CreateTenantUrlRequest, opts ...grpc.CallOption) (*v1alpha1.TenantUrl, error)
 	UpdateTenantUrl(ctx context.Context, in *UpdateTenantUrlRequest, opts ...grpc.CallOption) (*v1alpha1.TenantUrl, error)
+	PatchTenantUrl(ctx context.Context, in *PatchTenantUrlRequest, opts ...grpc.CallOption) (*v1alpha1.TenantUrl, error)
 	DeleteTenantUrl(ctx context.Context, in *DeleteTenantUrlRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetTenantUrlConfig(ctx context.Context, in *GetTenantUrlConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
-	UpdateTenantUrlConfig(ctx context.Context, in *UpdateTenantUrlConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error)
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	UserSearchPredicates(ctx context.Context, in *UserSearchPredicatesRequest, opts ...grpc.CallOption) (*UserSearchPredicatesResponse, error)
 	SearchUsers(ctx context.Context, in *SearchUsersRequest, opts ...grpc.CallOption) (*SearchUsersResponse, error)
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error)
 	UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error)
+	PatchUser(ctx context.Context, in *PatchUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListRolesByUser(ctx context.Context, in *ListRolesByUserRequest, opts ...grpc.CallOption) (*ListRolesByUserResponse, error)
 	AssociateRolesToUser(ctx context.Context, in *AssociateRolesToUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -137,13 +139,13 @@ type AuthwiseManagementServiceClient interface {
 	ListProviders(ctx context.Context, in *ListProvidersRequest, opts ...grpc.CallOption) (*ListProvidersResponse, error)
 	CreateProvider(ctx context.Context, in *CreateProviderRequest, opts ...grpc.CallOption) (*v1alpha1.Provider, error)
 	UpdateProvider(ctx context.Context, in *UpdateProviderRequest, opts ...grpc.CallOption) (*v1alpha1.Provider, error)
+	PatchProvider(ctx context.Context, in *PatchProviderRequest, opts ...grpc.CallOption) (*v1alpha1.Provider, error)
 	DeleteProvider(ctx context.Context, in *DeleteProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetProviderConfig(ctx context.Context, in *GetProviderConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
-	UpdateProviderConfig(ctx context.Context, in *UpdateProviderConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
 	GetRealm(ctx context.Context, in *GetRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error)
 	ListRealms(ctx context.Context, in *ListRealmsRequest, opts ...grpc.CallOption) (*ListRealmsResponse, error)
 	CreateRealm(ctx context.Context, in *CreateRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error)
 	UpdateRealm(ctx context.Context, in *UpdateRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error)
+	PatchRealm(ctx context.Context, in *PatchRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error)
 	DeleteRealm(ctx context.Context, in *DeleteRealmRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetClient(ctx context.Context, in *GetClientRequest, opts ...grpc.CallOption) (*v1alpha1.Client, error)
 	ListClients(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*ListClientsResponse, error)
@@ -151,25 +153,27 @@ type AuthwiseManagementServiceClient interface {
 	AssociateProvidersToClient(ctx context.Context, in *AssociateProvidersToClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateClient(ctx context.Context, in *CreateClientRequest, opts ...grpc.CallOption) (*v1alpha1.Client, error)
 	UpdateClient(ctx context.Context, in *UpdateClientRequest, opts ...grpc.CallOption) (*v1alpha1.Client, error)
+	PatchClient(ctx context.Context, in *PatchClientRequest, opts ...grpc.CallOption) (*v1alpha1.Client, error)
 	DeleteClient(ctx context.Context, in *DeleteClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetClientConfig(ctx context.Context, in *GetClientConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
-	UpdateClientConfig(ctx context.Context, in *UpdateClientConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error)
 	GetRole(ctx context.Context, in *GetRoleRequest, opts ...grpc.CallOption) (*v1alpha1.Role, error)
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
 	ListPermissionsByRole(ctx context.Context, in *ListPermissionsByRoleRequest, opts ...grpc.CallOption) (*ListPermissionsByRoleResponse, error)
 	AssociatePermissionsToRole(ctx context.Context, in *AssociatePermissionsToRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*v1alpha1.Role, error)
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*v1alpha1.Role, error)
+	PatchRole(ctx context.Context, in *PatchRoleRequest, opts ...grpc.CallOption) (*v1alpha1.Role, error)
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetPermission(ctx context.Context, in *GetPermissionRequest, opts ...grpc.CallOption) (*v1alpha1.Permission, error)
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
 	CreatePermission(ctx context.Context, in *CreatePermissionRequest, opts ...grpc.CallOption) (*v1alpha1.Permission, error)
 	UpdatePermission(ctx context.Context, in *UpdatePermissionRequest, opts ...grpc.CallOption) (*v1alpha1.Permission, error)
+	PatchPermission(ctx context.Context, in *PatchPermissionRequest, opts ...grpc.CallOption) (*v1alpha1.Permission, error)
 	DeletePermission(ctx context.Context, in *DeletePermissionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetAudience(ctx context.Context, in *GetAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error)
 	ListAudiences(ctx context.Context, in *ListAudiencesRequest, opts ...grpc.CallOption) (*ListAudiencesResponse, error)
 	CreateAudience(ctx context.Context, in *CreateAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error)
 	UpdateAudience(ctx context.Context, in *UpdateAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error)
+	PatchAudience(ctx context.Context, in *PatchAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error)
 	DeleteAudience(ctx context.Context, in *DeleteAudienceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetScope(ctx context.Context, in *GetScopeRequest, opts ...grpc.CallOption) (*v1alpha1.Scope, error)
 	ListScopes(ctx context.Context, in *ListScopesRequest, opts ...grpc.CallOption) (*ListScopesResponse, error)
@@ -177,6 +181,7 @@ type AuthwiseManagementServiceClient interface {
 	AssociatePermissionsToScope(ctx context.Context, in *AssociatePermissionsToScopeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateScope(ctx context.Context, in *CreateScopeRequest, opts ...grpc.CallOption) (*v1alpha1.Scope, error)
 	UpdateScope(ctx context.Context, in *UpdateScopeRequest, opts ...grpc.CallOption) (*v1alpha1.Scope, error)
+	PatchScope(ctx context.Context, in *PatchScopeRequest, opts ...grpc.CallOption) (*v1alpha1.Scope, error)
 	DeleteScope(ctx context.Context, in *DeleteScopeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetEvent(ctx context.Context, in *GetEventRequest, opts ...grpc.CallOption) (*v1alpha1.Event, error)
 	ListEvents(ctx context.Context, in *ListEventsRequest, opts ...grpc.CallOption) (*ListEventsResponse, error)
@@ -184,11 +189,13 @@ type AuthwiseManagementServiceClient interface {
 	ListAppearanceProfiles(ctx context.Context, in *ListAppearanceProfilesRequest, opts ...grpc.CallOption) (*ListAppearanceProfilesResponse, error)
 	CreateAppearanceProfile(ctx context.Context, in *CreateAppearanceProfileRequest, opts ...grpc.CallOption) (*v1alpha1.AppearanceProfile, error)
 	UpdateAppearanceProfile(ctx context.Context, in *UpdateAppearanceProfileRequest, opts ...grpc.CallOption) (*v1alpha1.AppearanceProfile, error)
+	PatchAppearanceProfile(ctx context.Context, in *PatchAppearanceProfileRequest, opts ...grpc.CallOption) (*v1alpha1.AppearanceProfile, error)
 	DeleteAppearanceProfile(ctx context.Context, in *DeleteAppearanceProfileRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTheme(ctx context.Context, in *GetThemeRequest, opts ...grpc.CallOption) (*v1alpha1.Theme, error)
 	ListThemes(ctx context.Context, in *ListThemesRequest, opts ...grpc.CallOption) (*ListThemesResponse, error)
 	CreateTheme(ctx context.Context, in *CreateThemeRequest, opts ...grpc.CallOption) (*v1alpha1.Theme, error)
 	UpdateTheme(ctx context.Context, in *UpdateThemeRequest, opts ...grpc.CallOption) (*v1alpha1.Theme, error)
+	PatchTheme(ctx context.Context, in *PatchThemeRequest, opts ...grpc.CallOption) (*v1alpha1.Theme, error)
 	DeleteTheme(ctx context.Context, in *DeleteThemeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -236,27 +243,18 @@ func (c *authwiseManagementServiceClient) UpdateTenant(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchTenant(ctx context.Context, in *PatchTenantRequest, opts ...grpc.CallOption) (*v1alpha1.Tenant, error) {
+	out := new(v1alpha1.Tenant)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchTenant_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteTenant_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) GetTenantConfig(ctx context.Context, in *GetTenantConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_GetTenantConfig_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) UpdateTenantConfig(ctx context.Context, in *UpdateTenantConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateTenantConfig_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -299,27 +297,18 @@ func (c *authwiseManagementServiceClient) UpdateTenantUrl(ctx context.Context, i
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchTenantUrl(ctx context.Context, in *PatchTenantUrlRequest, opts ...grpc.CallOption) (*v1alpha1.TenantUrl, error) {
+	out := new(v1alpha1.TenantUrl)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchTenantUrl_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteTenantUrl(ctx context.Context, in *DeleteTenantUrlRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteTenantUrl_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) GetTenantUrlConfig(ctx context.Context, in *GetTenantUrlConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_GetTenantUrlConfig_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) UpdateTenantUrlConfig(ctx context.Context, in *UpdateTenantUrlConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateTenantUrlConfig_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -374,6 +363,15 @@ func (c *authwiseManagementServiceClient) CreateUser(ctx context.Context, in *Cr
 func (c *authwiseManagementServiceClient) UpdateUser(ctx context.Context, in *UpdateUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error) {
 	out := new(v1alpha1.User)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateUser_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authwiseManagementServiceClient) PatchUser(ctx context.Context, in *PatchUserRequest, opts ...grpc.CallOption) (*v1alpha1.User, error) {
+	out := new(v1alpha1.User)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchUser_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -443,27 +441,18 @@ func (c *authwiseManagementServiceClient) UpdateProvider(ctx context.Context, in
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchProvider(ctx context.Context, in *PatchProviderRequest, opts ...grpc.CallOption) (*v1alpha1.Provider, error) {
+	out := new(v1alpha1.Provider)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchProvider_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteProvider(ctx context.Context, in *DeleteProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteProvider_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) GetProviderConfig(ctx context.Context, in *GetProviderConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_GetProviderConfig_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) UpdateProviderConfig(ctx context.Context, in *UpdateProviderConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateProviderConfig_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -500,6 +489,15 @@ func (c *authwiseManagementServiceClient) CreateRealm(ctx context.Context, in *C
 func (c *authwiseManagementServiceClient) UpdateRealm(ctx context.Context, in *UpdateRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error) {
 	out := new(v1alpha1.Realm)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateRealm_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authwiseManagementServiceClient) PatchRealm(ctx context.Context, in *PatchRealmRequest, opts ...grpc.CallOption) (*v1alpha1.Realm, error) {
+	out := new(v1alpha1.Realm)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchRealm_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -569,27 +567,18 @@ func (c *authwiseManagementServiceClient) UpdateClient(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchClient(ctx context.Context, in *PatchClientRequest, opts ...grpc.CallOption) (*v1alpha1.Client, error) {
+	out := new(v1alpha1.Client)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchClient_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteClient(ctx context.Context, in *DeleteClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteClient_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) GetClientConfig(ctx context.Context, in *GetClientConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_GetClientConfig_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *authwiseManagementServiceClient) UpdateClientConfig(ctx context.Context, in *UpdateClientConfigRequest, opts ...grpc.CallOption) (*structpb.Struct, error) {
-	out := new(structpb.Struct)
-	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateClientConfig_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -650,6 +639,15 @@ func (c *authwiseManagementServiceClient) UpdateRole(ctx context.Context, in *Up
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchRole(ctx context.Context, in *PatchRoleRequest, opts ...grpc.CallOption) (*v1alpha1.Role, error) {
+	out := new(v1alpha1.Role)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchRole_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteRole_FullMethodName, in, out, opts...)
@@ -695,6 +693,15 @@ func (c *authwiseManagementServiceClient) UpdatePermission(ctx context.Context, 
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchPermission(ctx context.Context, in *PatchPermissionRequest, opts ...grpc.CallOption) (*v1alpha1.Permission, error) {
+	out := new(v1alpha1.Permission)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchPermission_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeletePermission(ctx context.Context, in *DeletePermissionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeletePermission_FullMethodName, in, out, opts...)
@@ -734,6 +741,15 @@ func (c *authwiseManagementServiceClient) CreateAudience(ctx context.Context, in
 func (c *authwiseManagementServiceClient) UpdateAudience(ctx context.Context, in *UpdateAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error) {
 	out := new(v1alpha1.Audience)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_UpdateAudience_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *authwiseManagementServiceClient) PatchAudience(ctx context.Context, in *PatchAudienceRequest, opts ...grpc.CallOption) (*v1alpha1.Audience, error) {
+	out := new(v1alpha1.Audience)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchAudience_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -803,6 +819,15 @@ func (c *authwiseManagementServiceClient) UpdateScope(ctx context.Context, in *U
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchScope(ctx context.Context, in *PatchScopeRequest, opts ...grpc.CallOption) (*v1alpha1.Scope, error) {
+	out := new(v1alpha1.Scope)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchScope_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteScope(ctx context.Context, in *DeleteScopeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteScope_FullMethodName, in, out, opts...)
@@ -866,6 +891,15 @@ func (c *authwiseManagementServiceClient) UpdateAppearanceProfile(ctx context.Co
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchAppearanceProfile(ctx context.Context, in *PatchAppearanceProfileRequest, opts ...grpc.CallOption) (*v1alpha1.AppearanceProfile, error) {
+	out := new(v1alpha1.AppearanceProfile)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchAppearanceProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteAppearanceProfile(ctx context.Context, in *DeleteAppearanceProfileRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteAppearanceProfile_FullMethodName, in, out, opts...)
@@ -911,6 +945,15 @@ func (c *authwiseManagementServiceClient) UpdateTheme(ctx context.Context, in *U
 	return out, nil
 }
 
+func (c *authwiseManagementServiceClient) PatchTheme(ctx context.Context, in *PatchThemeRequest, opts ...grpc.CallOption) (*v1alpha1.Theme, error) {
+	out := new(v1alpha1.Theme)
+	err := c.cc.Invoke(ctx, AuthwiseManagementService_PatchTheme_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authwiseManagementServiceClient) DeleteTheme(ctx context.Context, in *DeleteThemeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, AuthwiseManagementService_DeleteTheme_FullMethodName, in, out, opts...)
@@ -928,22 +971,21 @@ type AuthwiseManagementServiceServer interface {
 	ListTenants(context.Context, *ListTenantsRequest) (*ListTenantsResponse, error)
 	CreateTenant(context.Context, *CreateTenantRequest) (*v1alpha1.Tenant, error)
 	UpdateTenant(context.Context, *UpdateTenantRequest) (*v1alpha1.Tenant, error)
+	PatchTenant(context.Context, *PatchTenantRequest) (*v1alpha1.Tenant, error)
 	DeleteTenant(context.Context, *DeleteTenantRequest) (*emptypb.Empty, error)
-	GetTenantConfig(context.Context, *GetTenantConfigRequest) (*structpb.Struct, error)
-	UpdateTenantConfig(context.Context, *UpdateTenantConfigRequest) (*structpb.Struct, error)
 	GetTenantUrl(context.Context, *GetTenantUrlRequest) (*v1alpha1.TenantUrl, error)
 	ListTenantUrls(context.Context, *ListTenantUrlsRequest) (*ListTenantUrlsResponse, error)
 	CreateTenantUrl(context.Context, *CreateTenantUrlRequest) (*v1alpha1.TenantUrl, error)
 	UpdateTenantUrl(context.Context, *UpdateTenantUrlRequest) (*v1alpha1.TenantUrl, error)
+	PatchTenantUrl(context.Context, *PatchTenantUrlRequest) (*v1alpha1.TenantUrl, error)
 	DeleteTenantUrl(context.Context, *DeleteTenantUrlRequest) (*emptypb.Empty, error)
-	GetTenantUrlConfig(context.Context, *GetTenantUrlConfigRequest) (*structpb.Struct, error)
-	UpdateTenantUrlConfig(context.Context, *UpdateTenantUrlConfigRequest) (*structpb.Struct, error)
 	GetUser(context.Context, *GetUserRequest) (*v1alpha1.User, error)
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	UserSearchPredicates(context.Context, *UserSearchPredicatesRequest) (*UserSearchPredicatesResponse, error)
 	SearchUsers(context.Context, *SearchUsersRequest) (*SearchUsersResponse, error)
 	CreateUser(context.Context, *CreateUserRequest) (*v1alpha1.User, error)
 	UpdateUser(context.Context, *UpdateUserRequest) (*v1alpha1.User, error)
+	PatchUser(context.Context, *PatchUserRequest) (*v1alpha1.User, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	ListRolesByUser(context.Context, *ListRolesByUserRequest) (*ListRolesByUserResponse, error)
 	AssociateRolesToUser(context.Context, *AssociateRolesToUserRequest) (*emptypb.Empty, error)
@@ -951,13 +993,13 @@ type AuthwiseManagementServiceServer interface {
 	ListProviders(context.Context, *ListProvidersRequest) (*ListProvidersResponse, error)
 	CreateProvider(context.Context, *CreateProviderRequest) (*v1alpha1.Provider, error)
 	UpdateProvider(context.Context, *UpdateProviderRequest) (*v1alpha1.Provider, error)
+	PatchProvider(context.Context, *PatchProviderRequest) (*v1alpha1.Provider, error)
 	DeleteProvider(context.Context, *DeleteProviderRequest) (*emptypb.Empty, error)
-	GetProviderConfig(context.Context, *GetProviderConfigRequest) (*structpb.Struct, error)
-	UpdateProviderConfig(context.Context, *UpdateProviderConfigRequest) (*structpb.Struct, error)
 	GetRealm(context.Context, *GetRealmRequest) (*v1alpha1.Realm, error)
 	ListRealms(context.Context, *ListRealmsRequest) (*ListRealmsResponse, error)
 	CreateRealm(context.Context, *CreateRealmRequest) (*v1alpha1.Realm, error)
 	UpdateRealm(context.Context, *UpdateRealmRequest) (*v1alpha1.Realm, error)
+	PatchRealm(context.Context, *PatchRealmRequest) (*v1alpha1.Realm, error)
 	DeleteRealm(context.Context, *DeleteRealmRequest) (*emptypb.Empty, error)
 	GetClient(context.Context, *GetClientRequest) (*v1alpha1.Client, error)
 	ListClients(context.Context, *ListClientsRequest) (*ListClientsResponse, error)
@@ -965,25 +1007,27 @@ type AuthwiseManagementServiceServer interface {
 	AssociateProvidersToClient(context.Context, *AssociateProvidersToClientRequest) (*emptypb.Empty, error)
 	CreateClient(context.Context, *CreateClientRequest) (*v1alpha1.Client, error)
 	UpdateClient(context.Context, *UpdateClientRequest) (*v1alpha1.Client, error)
+	PatchClient(context.Context, *PatchClientRequest) (*v1alpha1.Client, error)
 	DeleteClient(context.Context, *DeleteClientRequest) (*emptypb.Empty, error)
-	GetClientConfig(context.Context, *GetClientConfigRequest) (*structpb.Struct, error)
-	UpdateClientConfig(context.Context, *UpdateClientConfigRequest) (*structpb.Struct, error)
 	GetRole(context.Context, *GetRoleRequest) (*v1alpha1.Role, error)
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
 	ListPermissionsByRole(context.Context, *ListPermissionsByRoleRequest) (*ListPermissionsByRoleResponse, error)
 	AssociatePermissionsToRole(context.Context, *AssociatePermissionsToRoleRequest) (*emptypb.Empty, error)
 	CreateRole(context.Context, *CreateRoleRequest) (*v1alpha1.Role, error)
 	UpdateRole(context.Context, *UpdateRoleRequest) (*v1alpha1.Role, error)
+	PatchRole(context.Context, *PatchRoleRequest) (*v1alpha1.Role, error)
 	DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error)
 	GetPermission(context.Context, *GetPermissionRequest) (*v1alpha1.Permission, error)
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
 	CreatePermission(context.Context, *CreatePermissionRequest) (*v1alpha1.Permission, error)
 	UpdatePermission(context.Context, *UpdatePermissionRequest) (*v1alpha1.Permission, error)
+	PatchPermission(context.Context, *PatchPermissionRequest) (*v1alpha1.Permission, error)
 	DeletePermission(context.Context, *DeletePermissionRequest) (*emptypb.Empty, error)
 	GetAudience(context.Context, *GetAudienceRequest) (*v1alpha1.Audience, error)
 	ListAudiences(context.Context, *ListAudiencesRequest) (*ListAudiencesResponse, error)
 	CreateAudience(context.Context, *CreateAudienceRequest) (*v1alpha1.Audience, error)
 	UpdateAudience(context.Context, *UpdateAudienceRequest) (*v1alpha1.Audience, error)
+	PatchAudience(context.Context, *PatchAudienceRequest) (*v1alpha1.Audience, error)
 	DeleteAudience(context.Context, *DeleteAudienceRequest) (*emptypb.Empty, error)
 	GetScope(context.Context, *GetScopeRequest) (*v1alpha1.Scope, error)
 	ListScopes(context.Context, *ListScopesRequest) (*ListScopesResponse, error)
@@ -991,6 +1035,7 @@ type AuthwiseManagementServiceServer interface {
 	AssociatePermissionsToScope(context.Context, *AssociatePermissionsToScopeRequest) (*emptypb.Empty, error)
 	CreateScope(context.Context, *CreateScopeRequest) (*v1alpha1.Scope, error)
 	UpdateScope(context.Context, *UpdateScopeRequest) (*v1alpha1.Scope, error)
+	PatchScope(context.Context, *PatchScopeRequest) (*v1alpha1.Scope, error)
 	DeleteScope(context.Context, *DeleteScopeRequest) (*emptypb.Empty, error)
 	GetEvent(context.Context, *GetEventRequest) (*v1alpha1.Event, error)
 	ListEvents(context.Context, *ListEventsRequest) (*ListEventsResponse, error)
@@ -998,11 +1043,13 @@ type AuthwiseManagementServiceServer interface {
 	ListAppearanceProfiles(context.Context, *ListAppearanceProfilesRequest) (*ListAppearanceProfilesResponse, error)
 	CreateAppearanceProfile(context.Context, *CreateAppearanceProfileRequest) (*v1alpha1.AppearanceProfile, error)
 	UpdateAppearanceProfile(context.Context, *UpdateAppearanceProfileRequest) (*v1alpha1.AppearanceProfile, error)
+	PatchAppearanceProfile(context.Context, *PatchAppearanceProfileRequest) (*v1alpha1.AppearanceProfile, error)
 	DeleteAppearanceProfile(context.Context, *DeleteAppearanceProfileRequest) (*emptypb.Empty, error)
 	GetTheme(context.Context, *GetThemeRequest) (*v1alpha1.Theme, error)
 	ListThemes(context.Context, *ListThemesRequest) (*ListThemesResponse, error)
 	CreateTheme(context.Context, *CreateThemeRequest) (*v1alpha1.Theme, error)
 	UpdateTheme(context.Context, *UpdateThemeRequest) (*v1alpha1.Theme, error)
+	PatchTheme(context.Context, *PatchThemeRequest) (*v1alpha1.Theme, error)
 	DeleteTheme(context.Context, *DeleteThemeRequest) (*emptypb.Empty, error)
 }
 
@@ -1022,14 +1069,11 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateTenant(context.Context
 func (UnimplementedAuthwiseManagementServiceServer) UpdateTenant(context.Context, *UpdateTenantRequest) (*v1alpha1.Tenant, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenant not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchTenant(context.Context, *PatchTenantRequest) (*v1alpha1.Tenant, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchTenant not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteTenant(context.Context, *DeleteTenantRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenant not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) GetTenantConfig(context.Context, *GetTenantConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTenantConfig not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) UpdateTenantConfig(context.Context, *UpdateTenantConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenantConfig not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) GetTenantUrl(context.Context, *GetTenantUrlRequest) (*v1alpha1.TenantUrl, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTenantUrl not implemented")
@@ -1043,14 +1087,11 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateTenantUrl(context.Cont
 func (UnimplementedAuthwiseManagementServiceServer) UpdateTenantUrl(context.Context, *UpdateTenantUrlRequest) (*v1alpha1.TenantUrl, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenantUrl not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchTenantUrl(context.Context, *PatchTenantUrlRequest) (*v1alpha1.TenantUrl, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchTenantUrl not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteTenantUrl(context.Context, *DeleteTenantUrlRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenantUrl not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) GetTenantUrlConfig(context.Context, *GetTenantUrlConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTenantUrlConfig not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) UpdateTenantUrlConfig(context.Context, *UpdateTenantUrlConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateTenantUrlConfig not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) GetUser(context.Context, *GetUserRequest) (*v1alpha1.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
@@ -1069,6 +1110,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateUser(context.Context, 
 }
 func (UnimplementedAuthwiseManagementServiceServer) UpdateUser(context.Context, *UpdateUserRequest) (*v1alpha1.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUser not implemented")
+}
+func (UnimplementedAuthwiseManagementServiceServer) PatchUser(context.Context, *PatchUserRequest) (*v1alpha1.User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchUser not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
@@ -1091,14 +1135,11 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateProvider(context.Conte
 func (UnimplementedAuthwiseManagementServiceServer) UpdateProvider(context.Context, *UpdateProviderRequest) (*v1alpha1.Provider, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateProvider not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchProvider(context.Context, *PatchProviderRequest) (*v1alpha1.Provider, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchProvider not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteProvider(context.Context, *DeleteProviderRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProvider not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) GetProviderConfig(context.Context, *GetProviderConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetProviderConfig not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) UpdateProviderConfig(context.Context, *UpdateProviderConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateProviderConfig not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) GetRealm(context.Context, *GetRealmRequest) (*v1alpha1.Realm, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRealm not implemented")
@@ -1111,6 +1152,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateRealm(context.Context,
 }
 func (UnimplementedAuthwiseManagementServiceServer) UpdateRealm(context.Context, *UpdateRealmRequest) (*v1alpha1.Realm, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRealm not implemented")
+}
+func (UnimplementedAuthwiseManagementServiceServer) PatchRealm(context.Context, *PatchRealmRequest) (*v1alpha1.Realm, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchRealm not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) DeleteRealm(context.Context, *DeleteRealmRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRealm not implemented")
@@ -1133,14 +1177,11 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateClient(context.Context
 func (UnimplementedAuthwiseManagementServiceServer) UpdateClient(context.Context, *UpdateClientRequest) (*v1alpha1.Client, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateClient not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchClient(context.Context, *PatchClientRequest) (*v1alpha1.Client, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchClient not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteClient(context.Context, *DeleteClientRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteClient not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) GetClientConfig(context.Context, *GetClientConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetClientConfig not implemented")
-}
-func (UnimplementedAuthwiseManagementServiceServer) UpdateClientConfig(context.Context, *UpdateClientConfigRequest) (*structpb.Struct, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateClientConfig not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) GetRole(context.Context, *GetRoleRequest) (*v1alpha1.Role, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRole not implemented")
@@ -1160,6 +1201,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateRole(context.Context, 
 func (UnimplementedAuthwiseManagementServiceServer) UpdateRole(context.Context, *UpdateRoleRequest) (*v1alpha1.Role, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchRole(context.Context, *PatchRoleRequest) (*v1alpha1.Role, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchRole not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
@@ -1175,6 +1219,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreatePermission(context.Con
 func (UnimplementedAuthwiseManagementServiceServer) UpdatePermission(context.Context, *UpdatePermissionRequest) (*v1alpha1.Permission, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePermission not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchPermission(context.Context, *PatchPermissionRequest) (*v1alpha1.Permission, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchPermission not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeletePermission(context.Context, *DeletePermissionRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePermission not implemented")
 }
@@ -1189,6 +1236,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateAudience(context.Conte
 }
 func (UnimplementedAuthwiseManagementServiceServer) UpdateAudience(context.Context, *UpdateAudienceRequest) (*v1alpha1.Audience, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAudience not implemented")
+}
+func (UnimplementedAuthwiseManagementServiceServer) PatchAudience(context.Context, *PatchAudienceRequest) (*v1alpha1.Audience, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchAudience not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) DeleteAudience(context.Context, *DeleteAudienceRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAudience not implemented")
@@ -1211,6 +1261,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateScope(context.Context,
 func (UnimplementedAuthwiseManagementServiceServer) UpdateScope(context.Context, *UpdateScopeRequest) (*v1alpha1.Scope, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateScope not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchScope(context.Context, *PatchScopeRequest) (*v1alpha1.Scope, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchScope not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteScope(context.Context, *DeleteScopeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteScope not implemented")
 }
@@ -1232,6 +1285,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateAppearanceProfile(cont
 func (UnimplementedAuthwiseManagementServiceServer) UpdateAppearanceProfile(context.Context, *UpdateAppearanceProfileRequest) (*v1alpha1.AppearanceProfile, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAppearanceProfile not implemented")
 }
+func (UnimplementedAuthwiseManagementServiceServer) PatchAppearanceProfile(context.Context, *PatchAppearanceProfileRequest) (*v1alpha1.AppearanceProfile, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchAppearanceProfile not implemented")
+}
 func (UnimplementedAuthwiseManagementServiceServer) DeleteAppearanceProfile(context.Context, *DeleteAppearanceProfileRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAppearanceProfile not implemented")
 }
@@ -1246,6 +1302,9 @@ func (UnimplementedAuthwiseManagementServiceServer) CreateTheme(context.Context,
 }
 func (UnimplementedAuthwiseManagementServiceServer) UpdateTheme(context.Context, *UpdateThemeRequest) (*v1alpha1.Theme, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateTheme not implemented")
+}
+func (UnimplementedAuthwiseManagementServiceServer) PatchTheme(context.Context, *PatchThemeRequest) (*v1alpha1.Theme, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PatchTheme not implemented")
 }
 func (UnimplementedAuthwiseManagementServiceServer) DeleteTheme(context.Context, *DeleteThemeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteTheme not implemented")
@@ -1334,6 +1393,24 @@ func _AuthwiseManagementService_UpdateTenant_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchTenantRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchTenant(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchTenant_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchTenant(ctx, req.(*PatchTenantRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteTenant_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTenantRequest)
 	if err := dec(in); err != nil {
@@ -1348,42 +1425,6 @@ func _AuthwiseManagementService_DeleteTenant_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).DeleteTenant(ctx, req.(*DeleteTenantRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_GetTenantConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTenantConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).GetTenantConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_GetTenantConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).GetTenantConfig(ctx, req.(*GetTenantConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_UpdateTenantConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTenantConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).UpdateTenantConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_UpdateTenantConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).UpdateTenantConfig(ctx, req.(*UpdateTenantConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1460,6 +1501,24 @@ func _AuthwiseManagementService_UpdateTenantUrl_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchTenantUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchTenantUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchTenantUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchTenantUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchTenantUrl(ctx, req.(*PatchTenantUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteTenantUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteTenantUrlRequest)
 	if err := dec(in); err != nil {
@@ -1474,42 +1533,6 @@ func _AuthwiseManagementService_DeleteTenantUrl_Handler(srv interface{}, ctx con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).DeleteTenantUrl(ctx, req.(*DeleteTenantUrlRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_GetTenantUrlConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTenantUrlConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).GetTenantUrlConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_GetTenantUrlConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).GetTenantUrlConfig(ctx, req.(*GetTenantUrlConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_UpdateTenantUrlConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateTenantUrlConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).UpdateTenantUrlConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_UpdateTenantUrlConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).UpdateTenantUrlConfig(ctx, req.(*UpdateTenantUrlConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1618,6 +1641,24 @@ func _AuthwiseManagementService_UpdateUser_Handler(srv interface{}, ctx context.
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).UpdateUser(ctx, req.(*UpdateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthwiseManagementService_PatchUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchUser(ctx, req.(*PatchUserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1748,6 +1789,24 @@ func _AuthwiseManagementService_UpdateProvider_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchProvider_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchProvider(ctx, req.(*PatchProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteProviderRequest)
 	if err := dec(in); err != nil {
@@ -1762,42 +1821,6 @@ func _AuthwiseManagementService_DeleteProvider_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).DeleteProvider(ctx, req.(*DeleteProviderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_GetProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetProviderConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).GetProviderConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_GetProviderConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).GetProviderConfig(ctx, req.(*GetProviderConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_UpdateProviderConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateProviderConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).UpdateProviderConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_UpdateProviderConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).UpdateProviderConfig(ctx, req.(*UpdateProviderConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1870,6 +1893,24 @@ func _AuthwiseManagementService_UpdateRealm_Handler(srv interface{}, ctx context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).UpdateRealm(ctx, req.(*UpdateRealmRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthwiseManagementService_PatchRealm_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchRealmRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchRealm(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchRealm_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchRealm(ctx, req.(*PatchRealmRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2000,6 +2041,24 @@ func _AuthwiseManagementService_UpdateClient_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchClientRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchClient(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchClient_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchClient(ctx, req.(*PatchClientRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteClientRequest)
 	if err := dec(in); err != nil {
@@ -2014,42 +2073,6 @@ func _AuthwiseManagementService_DeleteClient_Handler(srv interface{}, ctx contex
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).DeleteClient(ctx, req.(*DeleteClientRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_GetClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetClientConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).GetClientConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_GetClientConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).GetClientConfig(ctx, req.(*GetClientConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _AuthwiseManagementService_UpdateClientConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateClientConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(AuthwiseManagementServiceServer).UpdateClientConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: AuthwiseManagementService_UpdateClientConfig_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthwiseManagementServiceServer).UpdateClientConfig(ctx, req.(*UpdateClientConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2162,6 +2185,24 @@ func _AuthwiseManagementService_UpdateRole_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchRole(ctx, req.(*PatchRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRoleRequest)
 	if err := dec(in); err != nil {
@@ -2252,6 +2293,24 @@ func _AuthwiseManagementService_UpdatePermission_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchPermission_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchPermission(ctx, req.(*PatchPermissionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeletePermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeletePermissionRequest)
 	if err := dec(in); err != nil {
@@ -2338,6 +2397,24 @@ func _AuthwiseManagementService_UpdateAudience_Handler(srv interface{}, ctx cont
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AuthwiseManagementServiceServer).UpdateAudience(ctx, req.(*UpdateAudienceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _AuthwiseManagementService_PatchAudience_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchAudienceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchAudience(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchAudience_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchAudience(ctx, req.(*PatchAudienceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2468,6 +2545,24 @@ func _AuthwiseManagementService_UpdateScope_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchScope_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchScopeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchScope(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchScope_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchScope(ctx, req.(*PatchScopeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteScope_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteScopeRequest)
 	if err := dec(in); err != nil {
@@ -2594,6 +2689,24 @@ func _AuthwiseManagementService_UpdateAppearanceProfile_Handler(srv interface{},
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchAppearanceProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchAppearanceProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchAppearanceProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchAppearanceProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchAppearanceProfile(ctx, req.(*PatchAppearanceProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteAppearanceProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAppearanceProfileRequest)
 	if err := dec(in); err != nil {
@@ -2684,6 +2797,24 @@ func _AuthwiseManagementService_UpdateTheme_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthwiseManagementService_PatchTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PatchThemeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthwiseManagementServiceServer).PatchTheme(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthwiseManagementService_PatchTheme_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthwiseManagementServiceServer).PatchTheme(ctx, req.(*PatchThemeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthwiseManagementService_DeleteTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteThemeRequest)
 	if err := dec(in); err != nil {
@@ -2726,16 +2857,12 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateTenant_Handler,
 		},
 		{
+			MethodName: "PatchTenant",
+			Handler:    _AuthwiseManagementService_PatchTenant_Handler,
+		},
+		{
 			MethodName: "DeleteTenant",
 			Handler:    _AuthwiseManagementService_DeleteTenant_Handler,
-		},
-		{
-			MethodName: "GetTenantConfig",
-			Handler:    _AuthwiseManagementService_GetTenantConfig_Handler,
-		},
-		{
-			MethodName: "UpdateTenantConfig",
-			Handler:    _AuthwiseManagementService_UpdateTenantConfig_Handler,
 		},
 		{
 			MethodName: "GetTenantUrl",
@@ -2754,16 +2881,12 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateTenantUrl_Handler,
 		},
 		{
+			MethodName: "PatchTenantUrl",
+			Handler:    _AuthwiseManagementService_PatchTenantUrl_Handler,
+		},
+		{
 			MethodName: "DeleteTenantUrl",
 			Handler:    _AuthwiseManagementService_DeleteTenantUrl_Handler,
-		},
-		{
-			MethodName: "GetTenantUrlConfig",
-			Handler:    _AuthwiseManagementService_GetTenantUrlConfig_Handler,
-		},
-		{
-			MethodName: "UpdateTenantUrlConfig",
-			Handler:    _AuthwiseManagementService_UpdateTenantUrlConfig_Handler,
 		},
 		{
 			MethodName: "GetUser",
@@ -2788,6 +2911,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUser",
 			Handler:    _AuthwiseManagementService_UpdateUser_Handler,
+		},
+		{
+			MethodName: "PatchUser",
+			Handler:    _AuthwiseManagementService_PatchUser_Handler,
 		},
 		{
 			MethodName: "DeleteUser",
@@ -2818,16 +2945,12 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateProvider_Handler,
 		},
 		{
+			MethodName: "PatchProvider",
+			Handler:    _AuthwiseManagementService_PatchProvider_Handler,
+		},
+		{
 			MethodName: "DeleteProvider",
 			Handler:    _AuthwiseManagementService_DeleteProvider_Handler,
-		},
-		{
-			MethodName: "GetProviderConfig",
-			Handler:    _AuthwiseManagementService_GetProviderConfig_Handler,
-		},
-		{
-			MethodName: "UpdateProviderConfig",
-			Handler:    _AuthwiseManagementService_UpdateProviderConfig_Handler,
 		},
 		{
 			MethodName: "GetRealm",
@@ -2844,6 +2967,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateRealm",
 			Handler:    _AuthwiseManagementService_UpdateRealm_Handler,
+		},
+		{
+			MethodName: "PatchRealm",
+			Handler:    _AuthwiseManagementService_PatchRealm_Handler,
 		},
 		{
 			MethodName: "DeleteRealm",
@@ -2874,16 +3001,12 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateClient_Handler,
 		},
 		{
+			MethodName: "PatchClient",
+			Handler:    _AuthwiseManagementService_PatchClient_Handler,
+		},
+		{
 			MethodName: "DeleteClient",
 			Handler:    _AuthwiseManagementService_DeleteClient_Handler,
-		},
-		{
-			MethodName: "GetClientConfig",
-			Handler:    _AuthwiseManagementService_GetClientConfig_Handler,
-		},
-		{
-			MethodName: "UpdateClientConfig",
-			Handler:    _AuthwiseManagementService_UpdateClientConfig_Handler,
 		},
 		{
 			MethodName: "GetRole",
@@ -2910,6 +3033,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateRole_Handler,
 		},
 		{
+			MethodName: "PatchRole",
+			Handler:    _AuthwiseManagementService_PatchRole_Handler,
+		},
+		{
 			MethodName: "DeleteRole",
 			Handler:    _AuthwiseManagementService_DeleteRole_Handler,
 		},
@@ -2930,6 +3057,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdatePermission_Handler,
 		},
 		{
+			MethodName: "PatchPermission",
+			Handler:    _AuthwiseManagementService_PatchPermission_Handler,
+		},
+		{
 			MethodName: "DeletePermission",
 			Handler:    _AuthwiseManagementService_DeletePermission_Handler,
 		},
@@ -2948,6 +3079,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAudience",
 			Handler:    _AuthwiseManagementService_UpdateAudience_Handler,
+		},
+		{
+			MethodName: "PatchAudience",
+			Handler:    _AuthwiseManagementService_PatchAudience_Handler,
 		},
 		{
 			MethodName: "DeleteAudience",
@@ -2978,6 +3113,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateScope_Handler,
 		},
 		{
+			MethodName: "PatchScope",
+			Handler:    _AuthwiseManagementService_PatchScope_Handler,
+		},
+		{
 			MethodName: "DeleteScope",
 			Handler:    _AuthwiseManagementService_DeleteScope_Handler,
 		},
@@ -3006,6 +3145,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AuthwiseManagementService_UpdateAppearanceProfile_Handler,
 		},
 		{
+			MethodName: "PatchAppearanceProfile",
+			Handler:    _AuthwiseManagementService_PatchAppearanceProfile_Handler,
+		},
+		{
 			MethodName: "DeleteAppearanceProfile",
 			Handler:    _AuthwiseManagementService_DeleteAppearanceProfile_Handler,
 		},
@@ -3024,6 +3167,10 @@ var AuthwiseManagementService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateTheme",
 			Handler:    _AuthwiseManagementService_UpdateTheme_Handler,
+		},
+		{
+			MethodName: "PatchTheme",
+			Handler:    _AuthwiseManagementService_PatchTheme_Handler,
 		},
 		{
 			MethodName: "DeleteTheme",
