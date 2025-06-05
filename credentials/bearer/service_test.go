@@ -33,6 +33,8 @@ func (s *singleInvokeService) Get(ctx context.Context) (string, error) {
 
 func TestMainService_Get(t *testing.T) {
 
+	a := assert.New(t)
+
 	type s struct {
 		arrange func(ctx context.Context) (context.Context, []bearer.Service)
 		assert  func(ctx context.Context, got string, err error)
@@ -50,8 +52,8 @@ func TestMainService_Get(t *testing.T) {
 				return ctx, nil
 			},
 			assert: func(ctx context.Context, got string, err error) {
-				assert.Empty(t, got)
-				assert.EqualError(t, err, "bearer token could not be retrieved")
+				a.Empty(got)
+				a.EqualError(err, "bearer token could not be retrieved")
 			},
 		},
 		"delegates no return": {
@@ -67,12 +69,12 @@ func TestMainService_Get(t *testing.T) {
 				return ctx, []bearer.Service{delegate1, delegate2}
 			},
 			assert: func(ctx context.Context, got string, err error) {
-				assert.Empty(t, got)
-				assert.EqualError(t, err, "bearer token could not be retrieved")
-				assert.Same(t, ctx, delegate1.passedContext)
-				assert.Same(t, ctx, delegate2.passedContext)
-				assert.True(t, delegate1.called)
-				assert.True(t, delegate2.called)
+				a.Empty(got)
+				a.EqualError(err, "bearer token could not be retrieved")
+				a.Equal(ctx, delegate1.passedContext)
+				a.Equal(ctx, delegate2.passedContext)
+				a.True(delegate1.called)
+				a.True(delegate2.called)
 			},
 		},
 		"delegates first return": {
@@ -88,12 +90,12 @@ func TestMainService_Get(t *testing.T) {
 				return ctx, []bearer.Service{delegate1, delegate2}
 			},
 			assert: func(ctx context.Context, got string, err error) {
-				assert.Equal(t, token, got)
-				assert.Nil(t, err)
-				assert.Same(t, ctx, delegate1.passedContext)
-				assert.Nil(t, delegate2.passedContext)
-				assert.True(t, delegate1.called)
-				assert.False(t, delegate2.called)
+				a.Equal(token, got)
+				a.Nil(err)
+				a.Equal(ctx, delegate1.passedContext)
+				a.Nil(delegate2.passedContext)
+				a.True(delegate1.called)
+				a.False(delegate2.called)
 			},
 		},
 		"delegates first error": {
@@ -109,12 +111,12 @@ func TestMainService_Get(t *testing.T) {
 				return ctx, []bearer.Service{delegate1, delegate2}
 			},
 			assert: func(ctx context.Context, got string, err error) {
-				assert.Empty(t, got)
-				assert.Same(t, testErr, err)
-				assert.Same(t, ctx, delegate1.passedContext)
-				assert.Nil(t, delegate2.passedContext)
-				assert.True(t, delegate1.called)
-				assert.False(t, delegate2.called)
+				a.Empty(got)
+				a.Equal(testErr, err)
+				a.Equal(ctx, delegate1.passedContext)
+				a.Nil(delegate2.passedContext)
+				a.True(delegate1.called)
+				a.False(delegate2.called)
 			},
 		},
 		"delegates second": {
@@ -130,12 +132,12 @@ func TestMainService_Get(t *testing.T) {
 				return ctx, []bearer.Service{delegate1, delegate2}
 			},
 			assert: func(ctx context.Context, got string, err error) {
-				assert.Equal(t, token, got)
-				assert.Nil(t, err)
-				assert.Same(t, ctx, delegate1.passedContext)
-				assert.Same(t, ctx, delegate2.passedContext)
-				assert.True(t, delegate1.called)
-				assert.True(t, delegate2.called)
+				a.Equal(token, got)
+				a.Nil(err)
+				a.Equal(ctx, delegate1.passedContext)
+				a.Equal(ctx, delegate2.passedContext)
+				a.True(delegate1.called)
+				a.True(delegate2.called)
 			},
 		},
 	}
